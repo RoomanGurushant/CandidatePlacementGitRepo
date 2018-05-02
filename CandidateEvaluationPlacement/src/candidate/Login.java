@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import connect.Connect;
 
-@WebServlet("/Login")
+//@WebServlet("/Login")
 
 public class Login extends Connect {
 	public static final long serialVersionUID = 1L;
