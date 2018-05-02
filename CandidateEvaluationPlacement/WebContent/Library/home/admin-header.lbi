@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><table width="1000" border="0" align="center" cellpadding="0" cellspacing="0" class="tblshade">
+      <tr>
+        <td width="200" height="100" align="center" valign="middle"><img src="../admin-ifx/emax-logo.jpg" width="235" height="100" alt="EMAX"></td>
+        <td align="center"><strong><img src="../admin-ifx/logo.jpg" width="300" height="70" alt="Axela"><br>
+        </strong></td>
+        <td width="200" align="center"><%if(session.getAttribute("signinname")!=null)
+      out.print("<strong>&nbsp;Welcome,<br>"+session.getAttribute("signinname").toString()+"</strong>");
+       %></td>
+      </tr>
+    </table>

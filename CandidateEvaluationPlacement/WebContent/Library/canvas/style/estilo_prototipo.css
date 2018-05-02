@@ -1,0 +1,384 @@
+body {
+	background-color: #FFF;
+	background-repeat: no-repeat;
+	background-position: center;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin: 0px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+#tela {
+	position: absolute;
+	z-index: 1;
+	left: 50%;
+	top: 50%;
+	display: none;
+}
+
+#contorno {
+	width: 742px;
+	height: 386px;
+	border: 2px solid gray;
+	background-color: transparent;
+	background-image: url("../imgs/room/mela.jpg");
+	padding: 8px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+#desenho {
+	border: 1px solid #666;
+	width: 560px;
+	height: 383px;
+	margin: 0px 8px 0px 0px;
+	background-color: #FFF;
+	position: relative;
+}
+
+#logo {
+	border: 1px solid #666;
+	text-align: center;
+	padding: 5px;
+	width: 160px;
+}
+
+.borda {
+	width: 170px;
+	border: 1px solid #666;
+	font-size: 11px;
+	background-color: white;
+	margin-top: 8px;
+}
+
+#opcoes {
+	float: left;
+	background-color: #DDD;
+	width: 54px;
+	height: 330px;
+	padding: 2px;
+	border-right: 1px solid #CCC;
+	position: relative;
+}
+
+#opcoes2 {
+	float: left;
+	background-color: #DDD;
+	width: 26px;
+	height: 301px;
+	padding: 2px;
+	border-left: 1px solid #CCC;
+}
+
+#opcoesCoord {
+	position: absolute;
+	bottom: 2px;
+	left: 0;
+	width: 56px;
+	text-align: center;
+	color: #444;
+	font-size: 10px;
+}
+
+#menu {
+	width: 382px;
+	margin: 0;
+}
+
+.op {
+	float: left;
+	width: 24px;
+	height: 24px;
+	background-color: #EEE;
+	border: 1px solid #CCC;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.op:hover {
+	border-color: #0000FF;
+}
+
+.opImg {
+	background-image: url("../imgs/room/sprites1.png");
+}
+
+.op_sel {
+	float: left;
+	width: 24px;
+	height: 24px;
+	background-color: #00BFFF;
+	border: 1px solid #0000FF;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#canvas {
+	float: right;
+	background-color: #FFF;
+}
+
+#canvasPrev {
+	position: relative;
+	float: right;
+	margin-top: -334px;
+	z-index: 2;
+}
+
+#cores {
+	clear: both;
+	background-color: #DDD;
+	height: 26px;
+	padding: 2px;
+	border-top: 1px solid #CCC;
+	text-align: center;
+}
+
+.titulo {
+	background-color: white;
+	background-image: url("../imgs/room/sprites.png");
+	height: 16px;
+	border-bottom: 1px solid #666;
+	font-size: 11px;
+	font-weight: bold;
+	color: #666666;
+	padding: 1px 4px 0 4px;
+	text-align: center;
+}
+
+.conteudo {
+	padding: 4px;
+	font-size: 11px;
+	font-weight: normal;
+	color: #333;
+	overflow: auto;
+}
+
+.cor {
+	float: left;
+	border: 1px solid black;
+	width: 10px;
+	height: 10px;
+	margin-left: 2px;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.envio {
+	font-weight: bolder;
+	font-size: 11px;
+	color: #666;
+	text-decoration: none;
+}
+
+ul.lista {
+	padding-left: 0;
+	padding-right: 0;
+	border: none;
+	margin: 0;
+}
+
+ul.lista li {
+	list-style: none;
+}
+
+ul.lista li a {
+	margin: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	text-decoration: none;
+	color: blue;
+	display: block;
+	border-bottom: 1px solid #DDD;
+}
+
+ul.lista li a:hover {
+	background-color: #EEE;
+}
+
+.link_off a {
+	color: gray;
+}
+
+.imgSalvar {
+	width: 125px;
+	height: 84px;
+}
+
+#texto_alerta {
+	position: absolute;
+	top: 50%;
+	left: 78px;
+	width: 282px;
+	text-align: center;
+	font: bolder 19px Arial;
+	line-height: normal;
+	color: #999;
+	z-index: 1;
+	display: none;
+}
+
+hr {
+	margin: 0 0 3px 0;
+	padding: 0;
+}
+
+.divhr {
+	margin: 2px 0 2px 0;
+	border-top: 1px solid gray;
+	height: 1px;
+	overflow: hidden;
+	clear: both;
+}
+
+#janela {
+	border: 3px solid gray;
+	position: absolute;
+	width: 330px;
+	height: 380px;
+	background-color: white;
+	top: 50%;
+	left: 50%;
+	z-index: 11;
+	text-align: center;
+	display: none;
+	margin-left: -167px;
+	margin-top: -195px;
+}
+
+#fundo {
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	opacity: .60;
+	z-index: 10;
+}
+
+.transparente {
+	-moz-opacity: 0.75;
+	-khtml-opacity: .75;
+	opacity: .75;
+}
+
+#carregando {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -17px;
+	margin-left: -70px;
+	text-align: center;
+	padding: 10px;
+	width: 120px;
+	font: bold 12px Verdana;
+	background-color: white;
+	color: #333;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+#cor_escolhida_fundo {
+	position: relative;
+	overflow: hidden;
+	border-color: black;
+	float: left;
+}
+
+#cor_escolhida {
+	width: 24px;
+	height: 24px;
+}
+
+.alpha90 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+	-moz-opacity: 0.9;
+	-khtml-opacity: .9;
+	opacity: .9;
+}
+
+.alpha80 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: .8;
+	opacity: .8;
+}
+
+.alpha70 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+	-moz-opacity: 0.7;
+	-khtml-opacity: .7;
+	opacity: .7;
+}
+
+.alpha60 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+	-moz-opacity: 0.6;
+	-khtml-opacity: .6;
+	opacity: .6;
+}
+
+.alpha50 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: .5;
+	opacity: .5;
+}
+
+.alpha40 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+	-moz-opacity: 0.4;
+	-khtml-opacity: .4;
+	opacity: .4;
+}
+
+.alpha30 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+	-moz-opacity: 0.3;
+	-khtml-opacity: .3;
+	opacity: .3;
+}
+
+.alpha20 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=20);
+	-moz-opacity: 0.2;
+	-khtml-opacity: .2;
+	opacity: .2;
+}
+
+.alpha10 {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=10);
+	-moz-opacity: 0.1;
+	-khtml-opacity: .1;
+	opacity: .1;
+}
+
+#topoCores {
+	position: absolute;
+	top: 50px;
+	margin-top: -8px;
+	right: 0;
+	width: 150px;
+}
+
+.topoCor {
+	float: right;
+	border: 1px solid #000;
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	margin-left: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}

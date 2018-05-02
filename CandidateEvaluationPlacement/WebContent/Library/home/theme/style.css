@@ -1,0 +1,462 @@
+body, p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-align: Justify;
+	color: #333;
+}
+
+a {
+	color: #053b75;
+	text-decoration: underline
+}
+
+A:hover {
+	COLOR: #ff0000;
+	TEXT-DECORATION: underline
+}
+
+A:Active {
+	COLOR: #43478f;
+	text-decoration: underline
+}
+
+a:visited {
+	color: #053b75;
+	text-decoration: underline
+}
+
+TD {
+	FONT-SIZE: 11px;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+/* navigation links and disclaimer text styles */
+.textformat {
+	word-wrap: break-word;
+}
+
+.textbox {
+	padding: 0.2em;
+	color: #111;
+	font-size: 11px;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	margin-bottom: 0px;
+	background: #f5f5f5;
+	border: 1px solid #999;
+	-webkit-appearance: textfield;
+	/* box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-moz-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-webkit-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-ms-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-o-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+*/
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	behavior: url(../theme1/js/PIE.htc);
+	position: relative;
+}
+
+.textboxright {
+	padding: 0.2em;
+	color: #111;
+	margin-bottom: 0px;
+	background: #f5f5f5;
+	border: 1px solid #999;
+	-webkit-appearance: textfield;
+	/* box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-moz-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-webkit-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-ms-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05);
+	-o-box-shadow:1px 1px 3px 1px rgba(0,0,0,.05); */
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	behavior: url(../theme1/js/PIE.htc);
+	position: relative;
+	text-align: right;
+}
+
+.textbox:focus, .textbox:hover, .textboxright:focus, .textboxright:hover
+	{
+	border-color: #0a55a6;
+	color: #333;
+	background: #fff;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	-ms-box-shadow: none;
+	-o-box-shadow: none;
+}
+
+/* FancyDropdowns CSS 
+///////////////////////////////////////////////  */
+.dropdown {
+	width: 215px;
+	display: inline-block;
+	margin-top: 1px;
+	margin-left: 0px;
+	border: 1px solid #ededed;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	behavior: url(../theme1/js/PIE.htc);
+	background: #fff;
+	padding: 0px 10px;
+	position: absolute;
+	z-index: 10;
+}
+
+.hover_dropdown {
+	background: #fff;
+}
+
+.active_dropdown {
+	background: #fff;
+	border-color: #ededed;
+	border-radius: 3px 3px 0px 0px;
+	-moz-border-radius: 3px 3px 0px 0px;
+	-o-border-radius: 3px 3px 0px 0px;
+	-webkit-border-radius: 3px 3px 0px 0px;
+	behavior: url(../theme1/js/PIE.htc);
+}
+
+.dropdownlist {
+	list-style: none;
+	-moz-border-radius: 0px 0px 3px 3px;
+	-o-border-radius: 0px 0px 3px 3px;
+	-webkit-border-radius: 0px 0px 3px 3px;
+	border-radius: 0px 0px 3px 3px;
+	behavior: url(../theme1/js/PIE.htc);
+	position: absolute;
+	display: none;
+	background-color: #fff;
+	background-image: url(../../admin-ifx/dropdown_bg.png);
+	background-position: left bottom;
+	background-repeat: repeat-x;
+	margin-top: 12px;
+	width: 286px;
+	padding: 0px 11px;
+	margin-left: 0px;
+	z-index: 11;
+}
+
+.dropdownlist li {
+	border-bottom: 1px solid #efefef;
+	color: #666666;
+}
+
+.dropdownlist li.active img {
+	display: none;
+}
+
+.dropdownlist li.hover {
+	-moz-border-radius: 2px;
+	-o-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	behavior: url(../theme1/js/PIE.htc);
+}
+
+.dropdownlist li.hover p {
+	-moz-border-radius: 2px;
+	-o-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	behavior: url(../theme1/js/PIE.htc);
+	color: #467abb !important;
+}
+
+.dropdown .imgholder, .dropdownlist .imgholder {
+	display: none;
+}
+
+.dropdown p, .dropdownlist p {
+	margin: 2px 4px 0px 2px;
+	color: #8A8A8A;
+	height: 31px;
+}
+
+.dropdown p.no-info, .dropdownlist p.no-info {
+	height: 23px;
+	line-height: 23px;
+	font-family: Arial;
+	font-size: 12px;
+	color: #8f8f8f;
+	margin-top: 1px;
+	cursor: default;
+}
+
+.dropdown p {
+	background: url(../../admin-ifx/combo_arrow.png) no-repeat right;
+}
+
+.dropdown p strong, .dropdown_no-info p strong, .dropdownlist p strong {
+	font-weight: normal;
+}
+
+/* end /////////////////////////// */
+.button {
+	padding: 3px 5px;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+	margin: 3px;
+	display: inline-block;
+	background-color: #1b62a9;
+	border: 0px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	behavior: url(../js/PIE.htc);
+	position: relative;
+	-webkit-appearance: none;
+	cursor: pointer;
+	-webkit-transition: background-color 0.2s linear;
+	-moz-transition: background-color 0.2s linear;
+	-o-transition: background-color 0.2s linear;
+	transition: background-color 0.2s linear;
+	/*
+	BORDER-RIGHT: #9d9d9d 1px solid;
+	BORDER-TOP: #9d9d9d 1px solid;
+	FONT-SIZE: 11px;
+	BORDER-LEFT: #9d9d9d 1px solid;
+	BORDER-BOTTOM: #9d9d9d 1px solid;
+	FONT-FAMILY: Verdana, Helvetica, Arial, sans-serif;
+	BACKGROUND-COLOR: #FFCC00;
+	*/
+}
+
+.button:hover {
+	background: #01488E;
+}
+
+.blue {
+	background-color: #527FC0;
+	font-weight: bold;
+	font-size: 11px;
+	color: #FFFFFF;
+}
+
+a img.light {
+	border: 1px solid #BBB;
+	padding: 3px;
+	margin: 10px 10px 10px 10px;
+	vertical-align: top;
+}
+
+.tableborder {
+	background-color: #FFF;
+	border-color: #1b62a9;
+	border-collapse: collapse;
+}
+
+.listtable {
+	width: 100%;
+	background-color: #FFF;
+	border-style: solid;
+	border-color: #1b62a9;
+	border-collapse: collapse;
+}
+
+.listtable td, .listtable pre {
+	padding: 3px;
+	line-height: 150%;
+	FONT-SIZE: 11px;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.listtable ul, .listtable li {
+	MARGIN-LEFT: 10px;
+	padding: 3px;
+	line-height: 150%;
+	FONT-SIZE: 11px;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.listtable th {
+	padding: 3px;
+	line-height: 150%;
+	color: #fff;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #0a55a6;
+	/*  background-color:#01488e;
+	background-color:#336699; */
+}
+
+.listtable th a, .listtable th a:visited {
+	color: #ffffff;
+	text-decoration: underline
+}
+
+.listtable tbody tr:hover {
+	background-color: #c2e5ff;
+}
+
+.listtable tr:nth-child(even) {
+	background-color: #ffffcc;
+}
+
+.tblshade {
+	border-left: #999 1px solid;
+	border-right: #999 1px solid;
+}
+
+.footer td {
+	font-size: 10px;
+}
+/* begin css tabs */
+ul#tabnav { /* general settings */
+	text-align: left; /* set to left, right or center */
+	margin: 1em 0 1em 0; /* set margins as desired */
+	font: bold 11px verdana, arial, sans-serif; /* set font as desired */
+	border-bottom: 1px solid #1b62a9; /* set border COLOR as desired */
+	list-style-type: none;
+	padding: 3px 10px 3px 10px;
+	/* THIRD number must change with respect to padding-top (X) below */
+}
+
+ul#tabnav li { /* do not change */
+	display: inline;
+	MARGIN-LEFT: -5px;
+}
+
+ul#tabnav li.selecttab { /* settings for selected tab */
+	border-bottom: 1px solid #fff;
+	/* set border color to page background color */
+	background-color: #fff;
+	/* set background color to match above border color */
+}
+
+ul#tabnav li.selecttab a { /* settings for selected tab link */
+	background-color: #fff;
+	/* set selected tab background color as desired */
+	color: #053b75; /* set selected tab link color as desired */
+	position: relative;
+	top: 1px;
+	padding-top: 4px;
+	/* must change with respect to padding (X) above and below */
+}
+
+ul#tabnav li a { /* settings for all tab links */
+	padding: 3px 4px;
+	/* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+	border: 1px solid #1b62a9;
+	/* set border COLOR as desired; usually matches border color specified in #tabnav */
+	background-color: #0a55a6;
+	/* set unselected tab background color as desired */
+	color: #FFF; /* set unselected tab link color as desired */
+	margin-right: 0px; /* set additional spacing between tabs as desired */
+	text-decoration: none;
+	border-bottom: none;
+}
+
+ul#tabnav a:hover { /* settings for hover effect */
+	background: #fff; /* set desired hover color */
+	color: #053b75;
+}
+/* end css tabs */
+
+/*POS style starts*/
+.pos-right {
+	display: inline-block;
+	vertical-align: top;
+	width: auto;
+	margin-left: 0px;
+}
+
+.pos-right input {
+	width: 50px;
+	height: 50px;
+	background-color: #999;
+}
+
+.pos-right input:hover {
+	background-color: #33C;
+}
+
+.pos-left {
+	display: inline-block;
+	vertical-align: top;
+	width: auto;
+	float: none;
+	margin-left: 10px;
+}
+
+.pos-left input {
+	width: 150px;
+	height: 50px;
+	background-color: #999;
+}
+
+.pos-left input:hover {
+	background-color: #33C;
+}
+
+.pos-search {
+	background-color: #CFF;
+}
+
+div.pos-home-div {
+	display: none;
+}
+
+.pos-cat {
+	background: #9C6;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+}
+
+.pos-cat:hover {
+	background-color: #CF6;
+}
+
+.pos-cat:Active {
+	background-color: #36F;
+}
+
+.pos-item {
+	background: #0F9;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+}
+
+.pos-button-span {
+	font-size: 9;
+}
+
+.pos-button-div {
+	
+}
+/*POS style ends*/
+.admin-master {
+	display: inline-block;
+}
+
+.admin-master a {
+	display: block;
+	background-image: url(../../admin-ifx/admin-master.png);
+	vertical-align: text-bottom;
+	width: 18px;
+	height: 16px;
+	margin: 0px 0px 0px 5px;
+}
+
+.footer {
+	width: 90%;
+	text-align: center;
+	margin-top: 10px;
+	border-top: 1px solid #CCC;
+}

@@ -1,0 +1,17 @@
+<table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0" class="footer">
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center"><b><%=mybean.ClientName%></b></td>
+  </tr>
+  <tr>
+    <td align="center">&copy; 2007-<%= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date())%> <a href="http://emax.in" target="_blank">Emax</a>. All rights reserved.</td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+</table>

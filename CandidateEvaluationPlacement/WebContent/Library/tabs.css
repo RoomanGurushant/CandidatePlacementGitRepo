@@ -1,0 +1,59 @@
+.TabsTable {
+	BORDER-RIGHT: #3367a0 1px solid;
+	BORDER-TOP: #3367a0 1px solid;
+	BORDER-LEFT: #3367a0 1px solid;
+	BORDER-BOTTOM: #3367a0 1px solid
+}
+
+#tablist {
+	PADDING-RIGHT: 0px;
+	MARGIN-TOP: 0.1em;
+	PADDING-LEFT: 0px;
+	MARGIN-BOTTOM: 0px;
+	PADDING-BOTTOM: 3px;
+	FONT: 12px Verdana;
+	MARGIN-LEFT: 0px;
+	PADDING-TOP: 3px
+}
+
+#tablist LI {
+	DISPLAY: inline;
+	MARGIN: -3px;
+	LIST-STYLE-TYPE: none
+}
+
+#tablist LI A {
+	BORDER-RIGHT: #3367a0 1px solid;
+	PADDING-RIGHT: 0.5em;
+	BORDER-TOP: #3367a0 1px solid;
+	PADDING-LEFT: 0.5em;
+	BACKGROUND: white;
+	PADDING-BOTTOM: 3px;
+	MARGIN-LEFT: 3px;
+	BORDER-LEFT: #3367a0 1px solid;
+	PADDING-TOP: 1px;
+	BORDER-BOTTOM: medium none;
+	TEXT-DECORATION: none
+}
+
+#tablist LI A:link {
+	FONT-SIZE: 12px;
+	COLOR: black
+}
+
+#tablist LI A:visited {
+	FONT-SIZE: 12px;
+	COLOR: black
+}
+
+#tablist LI A.current {
+	BACKGROUND: url(../Images/bg7.gif) #99CCFF
+}
+
+#tabcontentcontainer {
+	
+}
+
+.tabcontent {
+	DISPLAY: none
+}
