@@ -1,4 +1,4 @@
-package cloudify.connect;
+package connect;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;

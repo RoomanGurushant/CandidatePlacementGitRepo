@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import connect.Connect;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 //import com.sun.jersey.core.util.Base64;
@@ -139,7 +140,7 @@ public class Logintemp extends Connect {
 //					+ " AND emp_active = 1";
 			StrSql += " AND emp_email1 = ? "
 					+ " AND emp_upass = ? ";
-			conn = connectDb();
+			conn = connectDataBase();
 			pstmt = conn.prepareStatement(StrSql);
 			pstmt.setString(1, signinid);
 			pstmt.setString(2, password);
