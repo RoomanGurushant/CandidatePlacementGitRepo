@@ -68,9 +68,7 @@ public class Candidate_Evaluation_Update extends Connect {
 						candidate_active = "1";
 					} else {
 						GetValues(request, response);
-						SOP("11");	
 						AddFields();
-						SOP("**************---********");
 							if (!msg.equals("")) {
 								msg = "Error!" + msg;
 							} else {
@@ -188,7 +186,6 @@ public class Candidate_Evaluation_Update extends Connect {
 				}else {
 					evalType = "0";
 				}
-				SOP("22");
 				StrSql = "INSERT INTO candidatedb.rooman_candidate_eval"
 						+ " ("
 						+ " eval_candidate_id,"
@@ -206,14 +203,14 @@ public class Candidate_Evaluation_Update extends Connect {
 						+ " '" + candidate_eval_notes + "',"
 						+ " " + evalType + ")";
 
-				 SOP("Insert eval query===" + StrSql);
+//				 SOP("Insert eval query===" + StrSql);
 				candidate_eval_id = UpdateQueryReturnID(StrSql);
-				SOP("candidate_eval_id==" + candidate_eval_id);
+//				SOP("candidate_eval_id==" + candidate_eval_id);
 
 				if (!candidate_eval_id.equals("0")) {
 					for (int i = 0; i < candidate_subskill_id.length; i++) {
 						if (!candidate_subskill_id[i].equals("0") && !candidate_rating_id[i].equals("")) {
-							StrSql = "INSERT INTO rooman_candidate_eval_trans"
+							StrSql = "INSERT INTO candidatedb.rooman_candidate_eval_trans"
 									+ " ("
 									+ " evaltrans_eval_id,"
 									+ " evaltrans_subskill_id,"
@@ -222,7 +219,7 @@ public class Candidate_Evaluation_Update extends Connect {
 									+ " '" + candidate_eval_id + "',"
 									+ " '" + candidate_subskill_id[i] + "',"
 									+ " '" + candidate_rating_id[i] + "')";
-							 SOP("Insert eval trans query==11=" + StrSql);
+//							 SOP("Insert eval trans query==11=" + StrSql);
 							stmttx.addBatch(StrSql);
 						}
 					}

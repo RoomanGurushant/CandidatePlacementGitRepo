@@ -209,48 +209,43 @@ public class Connect extends HttpServlet {
 		}
 	}
 
-	
-	
 	public String UpdateQueryReturnID(String strSQL) {
 		ResultSet rs = null;
 		PreparedStatement stmtGetLastID = null, pstmt = null;
 		String res = "0";
-		Connection conn = connectDataBase();
 		try {
-			pstmt = conn.prepareStatement(strSQL);
+
+			con = connectDataBase();
+			pstmt = con.prepareStatement(strSQL);
 			pstmt.executeUpdate();
-			stmtGetLastID = conn.prepareStatement("SELECT LAST_INSERT_ID()");
+			stmtGetLastID = con.prepareStatement("SELECT LAST_INSERT_ID()");
 			rs = stmtGetLastID.executeQuery();
 			while (rs.next()) {
 				res = rs.getString(1);
 			}
-			// SOPError(res+" res");
 			return res;
 		} catch (Exception ex) {
 			SOPError(this.getClass().getName());
-			SOPError("Error in "
-					+ new Exception().getStackTrace()[0].getMethodName()
-					+ " : " + ex);
+			SOPError(new Exception().getStackTrace()[0].getMethodName() + " : " + ex);
 			return "0";
 		} finally {
 			try {
+				if (rs != null) {
+					rs.close();
+				}
 				if (pstmt != null) {
 					pstmt.close();
 				}
 				if (stmtGetLastID != null) {
 					stmtGetLastID.close();
 				}
-				if (rs != null) {
-					rs.close();
-				}
-				if (conn != null) {
-					conn.close();
+
+				if (con != null) {
+					con.close();
 				}
 			} catch (Exception ex) {
 				SOPError(this.getClass().getName());
-				SOPError("Error in "
-						+ new Exception().getStackTrace()[0].getMethodName()
-						+ " : " + ex);
+				SOPError(new Exception().getStackTrace()[0].getMethodName() + " : " + ex);
 			}
 		}
 	}
