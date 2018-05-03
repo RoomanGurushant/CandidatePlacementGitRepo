@@ -37,7 +37,7 @@ public class Candidate_Evaluation_Update extends Connect {
 	public String candidate_eval_time = "";
 	public String candidate_eval_id = "0";
 	public String subskill = "";
-	public Connection conntx = null;
+	public Connection con = null;
 	Statement stmttx = null;
 	public String QueryString = "";
 	public DecimalFormat deci = new DecimalFormat("0.00");
@@ -178,9 +178,9 @@ public class Candidate_Evaluation_Update extends Connect {
 		String evalType= "0" ;
 		if (msg.equals("")) {
 			try {
-				conntx = connectDataBase();
-				conntx.setAutoCommit(false);
-				stmttx = conntx.createStatement();
+				con = connectDataBase();
+				con.setAutoCommit(false);
+				stmttx = con.createStatement();
 				if(candidate_skill_id.equals("1")){
 					evalType = "1";
 				}else {
@@ -225,13 +225,13 @@ public class Candidate_Evaluation_Update extends Connect {
 					}
 				}
 				stmttx.executeBatch();
-				conntx.commit();
+				con.commit();
 			} catch (Exception e) {
-				if (conntx.isClosed()) {
+				if (con.isClosed()) {
 					SOPError("conn is closed.....");
 				}
-				if (!conntx.isClosed() && conntx != null) {
-					conntx.rollback();
+				if (!con.isClosed() && con != null) {
+					con.rollback();
 					SOPError("connection rollback...\n sql--" + StrSql);
 				}
 				msg = "<br>Transaction Error!";
@@ -239,8 +239,8 @@ public class Candidate_Evaluation_Update extends Connect {
 				SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + e);
 			} finally {
 				stmttx.close();
-				if (conntx != null && !conntx.isClosed()) {
-					conntx.close();
+				if (con != null && !con.isClosed()) {
+					con.close();
 				}
 			}
 		}
@@ -251,9 +251,9 @@ public class Candidate_Evaluation_Update extends Connect {
 		if (msg.equals("")) {
 			try {
 
-				conntx = connectDataBase();
-				conntx.setAutoCommit(false);
-				stmttx = conntx.createStatement();
+				con = connectDataBase();
+				con.setAutoCommit(false);
+				stmttx = con.createStatement();
 
 				StrSql = "UPDATE rooman_eval" + " SET"
 						+ " eval_skill_id = '" + candidate_skill_id + "',"
@@ -286,13 +286,13 @@ public class Candidate_Evaluation_Update extends Connect {
 					}
 				}
 				stmttx.executeBatch();
-				conntx.commit();
+				con.commit();
 			} catch (Exception e) {
-				if (conntx.isClosed()) {
+				if (con.isClosed()) {
 					SOPError("conn is closed.....");
 				}
-				if (!conntx.isClosed() && conntx != null) {
-					conntx.rollback();
+				if (!con.isClosed() && con != null) {
+					con.rollback();
 					SOPError("connection rollback...\n sql--" + StrSql);
 				}
 				msg = "<br>Transaction Error!";
@@ -300,9 +300,9 @@ public class Candidate_Evaluation_Update extends Connect {
 				SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + e);
 			} finally {
 				stmttx.close();
-				conntx.commit();
-				if (conntx != null && !conntx.isClosed()) {
-					conntx.close();
+				con.commit();
+				if (con != null && !con.isClosed()) {
+					con.close();
 				}
 			}
 		}
