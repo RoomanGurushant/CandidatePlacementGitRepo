@@ -34,7 +34,6 @@
 					<div class="tab-pane" id="">
 						<%=mybean.StrHTML%>
 <%-- 						<%@ include file="../Library/list-body.jsp"%> --%>
-</form>
 					</div>
 				</div>
 			</div>
@@ -48,31 +47,6 @@
 
 
 	<%@include file="../Library/js.jsp"%>
-
-	<script>
-
-function showContent(id){
-	var num = id.match(/\d/g);
-	conid = num.join("");
-	var con1=("moreContent")+conid;
-	document.getElementById(id).style.display="none";
-	document.getElementById(con1).style.display="block";
-	
-}
-
-function hideContent(id){
-		var num = id.match(/\d/g);
-		conid = num.join("");
-		var con2=("lessContent")+conid;
-		var con3=("moreContent")+conid;
-	
-		document.getElementById(con3).style.display="none";
-		document.getElementById(con2).style.display="block";
-	}
-
-</script>
-
-
 
 </body>
 </HTML>
