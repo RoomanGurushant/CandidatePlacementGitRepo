@@ -16,7 +16,7 @@ import javax.sql.rowset.CachedRowSet;
 
 import connect.Connect;
 
-public class Candidate_Evaluation_Update extends Connect {
+public class Candidate_Eval_Update extends Connect {
 	private static final long serialVersionUID = 1L;
 	public String add = "";
 	public String update = "";

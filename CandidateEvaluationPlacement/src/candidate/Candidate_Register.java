@@ -1,18 +1,18 @@
 package candidate;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.CachedRowSet;
+
 import connect.Connect;
 
-//@WebServlet("/Candidate_Register")
-
 public class Candidate_Register extends Connect {
-	public static final long serialVersionUID = 1L;
+public static final long serialVersionUID = 1L;
 	
 	public String candidate_fname = "";
 	public String candidate_lname = "";
@@ -45,6 +45,7 @@ public class Candidate_Register extends Connect {
 	public String candidate_role_id2 = "0";
 	public String candidate_functionalarea_id3 = "0";
 	public String candidate_role_id3 = "0";
+	public String candidate_area_id = "0";
 	public String candidate_curcity_id = "0";
 	public String candidate_prefcity_id1 = "0";
 	public String candidate_prefcity_id2 = "0";
@@ -58,171 +59,502 @@ public class Candidate_Register extends Connect {
 	
 	public String msg = "", msg1="";
 	public String Strsql = "";
+	public String add = "";
+	public String update = "";
+	public String addB = "";
+	public String updateB = "";
+	public String deleteB = "";
+	public String QueryString = "";
+	public String status = "";
+	public String candidate_id = "0";
+	public Connection con = null;
+	Statement stmttx = null;
 
-	
-	
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Getting into dopost candidate register");
-		
-		candidate_fname = PadQuotes(request.getParameter("txt_candidate_fname"));
-		//System.out.println("candidate_fname===" + candidate_fname);
-		
-		candidate_lname = PadQuotes(request.getParameter("txt_candidate_lname"));
-		//System.out.println("candidate_lname===" + candidate_lname);
-		
-		candidate_upass = PadQuotes(request.getParameter("txt_candidate_password"));
-		//System.out.println("candidate_password===" + candidate_upass);
-		
-		candidate_mobileno1 = PadQuotes(request.getParameter("txt_candidate_mobileno1"));
-		//System.out.println("candidate_mobileno1===" + candidate_mobileno1);
-		
-		candidate_mobileno2 = PadQuotes(request.getParameter("txt_candidate_mobileno2"));
-		//System.out.println("candidate_mobileno2===" + candidate_mobileno2);
-		
-		candidate_email1 = PadQuotes(request.getParameter("txt_candidate_email1"));
-		//System.out.println("candidate_email1===" + candidate_email1);
-		
-		candidate_email2 = PadQuotes(request.getParameter("txt_candidate_email2"));
-		//System.out.println("candidate_email2===" + candidate_email2);
-		
-		candidate_gender = PadQuotes(request.getParameter("radio_candidate_gender"));
-		if (candidate_gender.equals("on") || candidate_gender.equals("1")) {
-			candidate_gender = "1";
-		} else {
-			candidate_gender = "0";
-		}
-		//System.out.println("candidate_gender===" + candidate_gender);
-		
-		candidate_dob = PadQuotes(request.getParameter("date_candidate_dob"));
-		//System.out.println("candidate_dob===" + candidate_dob);
-		
-		candidate_married = PadQuotes(request.getParameter("radio_candidate_marital"));
-		if (candidate_married.equals("on") || candidate_married.equals("1")) {
-			candidate_married = "1";
-		} else {
-			candidate_married = "0";
-		}
-		//System.out.println("candidate_married===" + candidate_married);
-		
-		candidate_physically_challenged = CheckBoxValue(PadQuotes(request.getParameter("chk_physically_challenged")));
-		//System.out.println("candidate_physically_challenged===" + candidate_physically_challenged);
-		
-		candidate_address = PadQuotes(request.getParameter("textarea_candidate_address")); 
-		//System.out.println("candidate_address===" + candidate_address);
-		
-		candidate_aadhaar_no = PadQuotes(request.getParameter("txt_candidate_aadhaar"));
-		//System.out.println("candidate_aadhaar_no===" + candidate_aadhaar_no);
-		
-		candidate_active = CheckBoxValue(PadQuotes(request.getParameter("chk_active")));
-		//System.out.println("candidate_active===" + candidate_active);
-		
-		candidate_notes = PadQuotes(request.getParameter("txt_candidate_notes"));
-		//System.out.println("candidate_notes===" + candidate_notes);
-		
-		candidate_qualification_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_qualification_id")));
-		//System.out.println("candidate_qualification_id===" + candidate_qualification_id);
-		
-		candidate_specialization_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_specialization_id")));
-		//System.out.println("candidate_specialization_id===" + candidate_specialization_id);
-		
-		candidate_yop = CNumeric(PadQuotes(request.getParameter("dr_candidate_passingyear_id")));
-		//System.out.println("candidate_passingyear_id===" + candidate_yop);
-		
-		candidate_institute_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_institute_id")));
-		//System.out.println("candidate_institute_id===" + candidate_institute_id);
-		
-		candidate_experience= CNumeric(PadQuotes(request.getParameter("dr_candidate_expr_id")));
-		//System.out.println("candidate_expr_id===" + candidate_experience);
-		 
-		candidate_current_sal = PadQuotes(request.getParameter("txt_candidate_cur_sal"));
-		//System.out.println("candidate_cur_sal===" + candidate_current_sal);
-		
-		candidate_expected_sal = PadQuotes(request.getParameter("txt_candidate_exp_sal"));
-		//System.out.println("candidate_exp_sal===" + candidate_expected_sal);
-		
-		candidate_sector_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_sector_id")));
-		//System.out.println("candidate_sector_id===" + candidate_sector_id);
-		
-		candidate_functionalarea_id1 = CNumeric(PadQuotes(request.getParameter("dr_candidate_functionalarea1_id")));
-		//System.out.println("candidate_functionalarea1_id===" + candidate_functionalarea_id1);
-		
-		candidate_role_id1 = CNumeric(PadQuotes(request.getParameter("dr_candidate_role1_id")));
-		//System.out.println("candidate_role1_id===" + candidate_role_id1);
-		
-		candidate_functionalarea_id2 = CNumeric(PadQuotes(request.getParameter("dr_candidate_functionalarea2_id")));
-		//System.out.println("candidate_functionalarea2_id===" + candidate_functionalarea_id2);
-		
-		candidate_role_id2 = CNumeric(PadQuotes(request.getParameter("dr_candidate_role2_id")));
-		//System.out.println("candidate_role2_id===" + candidate_role_id2);
-		
-		candidate_functionalarea_id3 = CNumeric(PadQuotes(request.getParameter("dr_candidate_functionalarea3_id")));
-		//System.out.println("candidate_functionalarea3_id===" + candidate_functionalarea_id3);
-		
-		candidate_role_id3 = CNumeric(PadQuotes(request.getParameter("dr_candidate_role3_id")));
-		//System.out.println("candidate_role3_id===" + candidate_role_id3);
-		
-		candidate_curcity_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_currentcity_id")));
-		//System.out.println("candidate_currentcity_id===" + candidate_curcity_id);
-		
-		candidate_prefcity_id1 = CNumeric(PadQuotes(request.getParameter("dr_candidate_prefcity1_id")));
-		//System.out.println("candidate_prefcity1_id===" + candidate_prefcity_id1);
-		
-		candidate_prefcity_id2 = CNumeric(PadQuotes(request.getParameter("dr_candidate_prefcity2_id")));
-		//System.out.println("candidate_prefcity2_id===" + candidate_prefcity_id2);
-		
-		candidate_prefcity_id3 = CNumeric(PadQuotes(request.getParameter("dr_candidate_prefcity3_id")));
-		//System.out.println("candidate_prefcity3_id===" + candidate_prefcity_id3);
-		
-		candidate_skillset = PadQuotes(request.getParameter("textarea_candidate_skillset"));
-		//System.out.println("candidate_skillset===" + candidate_skillset);
-		
-		specialization = PadQuotes(request.getParameter("specialization"));
-//		//System.out.println("specialization===" + specialization);
-		
-		functionalarea1 = PadQuotes(request.getParameter("fa1"));
-		//System.out.println("functionalarea1===" + functionalarea1);
-		
-		functionalarea2 = PadQuotes(request.getParameter("fa2"));
-		//System.out.println("functionalarea2===" + functionalarea2);
-		
-		functionalarea3 = PadQuotes(request.getParameter("fa3"));
-		//System.out.println("functionalarea3===" + functionalarea3);
-		
-		msg = PadQuotes(request.getParameter("msg"));
-		
-		connectDB();
-		
-		checkForm();
-		
-		if (specialization.equals("yes")) {
-			candidate_qualification_id = CNumeric(PadQuotes(request.getParameter("candidate_qualification_id")));
-			msg = PopulateSpecialization(candidate_qualification_id);
-			//System.out.println("msg===" + msg);
-		}
-		
-		if (functionalarea1.equals("yes")) {
-			candidate_functionalarea_id1  = CNumeric(PadQuotes(request.getParameter("candidate_functionalarea1_id")));
-			msg = PopulateRoleOne(candidate_functionalarea_id1);
-		}
-		
-		if (functionalarea2.equals("yes")) {
-			candidate_functionalarea_id2 = CNumeric(PadQuotes(request.getParameter("candidate_functionalarea2_id")));
-			msg = PopulateRoleTwo(candidate_functionalarea_id2);
-		}
-		
-		if (functionalarea3.equals("yes")) {
-			candidate_functionalarea_id3 = CNumeric(PadQuotes(request.getParameter("candidate_functionalarea3_id")));
-			msg = PopulateRoleThree(candidate_functionalarea_id3);
-		}
-		
-//		if (!msg.equals("")) {
-//			response.sendRedirect("candidate-register.jsp?msg=" + msg);
-//		} else {
-			addFields(request, response);
-//		}
 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) {
+		try {
+//				CheckSession(request, response);
+				add = PadQuotes(request.getParameter("add"));
+				update = PadQuotes(request.getParameter("update"));
+				addB = PadQuotes(request.getParameter("add_button"));
+				updateB = PadQuotes(request.getParameter("update_button"));
+				deleteB = PadQuotes(request.getParameter("delete_button"));
+				msg = PadQuotes(request.getParameter("msg"));
+				QueryString = PadQuotes(request.getQueryString());
+				candidate_id = CNumeric(PadQuotes(request.getParameter("candidate_id")));
+				specialization = PadQuotes(request.getParameter("specialization"));
+				functionalarea1 = PadQuotes(request.getParameter("fa1"));
+				functionalarea2 = PadQuotes(request.getParameter("fa2"));
+				functionalarea3 = PadQuotes(request.getParameter("fa3"));
+
+				if (specialization.equals("yes")) {
+					candidate_qualification_id = CNumeric(PadQuotes(request.getParameter("candidate_qualification_id")));
+					msg = PopulateSpecialization(candidate_qualification_id);
+//					System.out.println("msg==specialization.equals.yes =" + msg);
+				}
+				
+				if (functionalarea1.equals("yes")) {
+					candidate_functionalarea_id1  = CNumeric(PadQuotes(request.getParameter("candidate_functionalarea1_id")));
+					msg = PopulateRoleOne(candidate_functionalarea_id1);
+				}
+				
+				if (functionalarea2.equals("yes")) {
+					candidate_functionalarea_id2 = CNumeric(PadQuotes(request.getParameter("candidate_functionalarea2_id")));
+					msg = PopulateRoleTwo(candidate_functionalarea_id2);
+				}
+				
+				if (functionalarea3.equals("yes")) {
+					candidate_functionalarea_id3 = CNumeric(PadQuotes(request.getParameter("candidate_functionalarea3_id")));
+					msg = PopulateRoleThree(candidate_functionalarea_id3);
+				}
+				
+				
+				if ("yes".equals(add)) {
+					status = "Add";
+					if (!"yes".equals(addB)) {
+						candidate_active = "1";
+					} else {
+						GetValues(request, response);
+						AddFields();
+							if (!msg.equals("")) {
+								msg = "Error!<br>" + msg;
+							} else {
+								msg = "Candidate Added Successfully!";
+								response.sendRedirect("../candidate/candidate-list.jsp?msg=Candidate Registered Successfully!");
+							}
+					}
+				} 
+				else if ("yes".equals(update)) {
+					status = "Update";
+					if (!"yes".equals(updateB) && !"Delete Candidate".equals(deleteB)) {
+						PopulateFields();
+					} else if ("yes".equals(updateB) && !"Delete Candidate".equals(deleteB)) {
+						GetValues(request, response);
+							UpdateFields();
+							if (!msg.equals("")) {
+								msg = "Error!" + msg;
+							} else {
+								msg = "Candidate Updated Successfully!";
+								response.sendRedirect(response.encodeRedirectURL("candidate-list.jsp?msg=" + msg));
+							}
+					} else if ("Delete Candidate".equals(deleteB)) {
+						GetValues(request, response);
+							DeleteFields();
+							if (!msg.equals("")) {
+								msg = "Error!" + msg;
+							} else {
+								msg = "Candidate Deleted Successfully!";
+								response.sendRedirect(response.encodeRedirectURL("candidate-list.jsp?msg=" + msg));
+							}
+					}
+				}
+		} catch (Exception ex) {
+			SOPError(this.getClass().getName());
+			SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
+		}
 	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	protected void GetValues(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		candidate_fname = PadQuotes(request.getParameter("txt_candidate_fname"));
+		candidate_lname = PadQuotes(request.getParameter("txt_candidate_lname"));
+		candidate_upass = PadQuotes(request.getParameter("txt_candidate_password"));
+		candidate_mobileno1 = PadQuotes(request.getParameter("txt_candidate_mobileno1"));
+		candidate_mobileno2 = PadQuotes(request.getParameter("txt_candidate_mobileno2"));
+		candidate_email1 = PadQuotes(request.getParameter("txt_candidate_email1"));
+		candidate_email2 = PadQuotes(request.getParameter("txt_candidate_email2"));
+		candidate_gender = PadQuotes(request.getParameter("dr_candidate_gender"));
+		candidate_dob = PadQuotes(request.getParameter("date_candidate_dob"));
+		SOP("candidate dob=="+ candidate_dob);
+		candidate_married = PadQuotes(request.getParameter("dr_candidate_married"));
+		candidate_physically_challenged = CheckBoxValue(PadQuotes(request.getParameter("chk_physically_challenged")));
+		candidate_address = PadQuotes(request.getParameter("textarea_candidate_address")); 
+		candidate_aadhaar_no = PadQuotes(request.getParameter("txt_candidate_aadhaar"));
+		candidate_active = CheckBoxValue(PadQuotes(request.getParameter("chk_active")));
+		candidate_notes = PadQuotes(request.getParameter("txt_candidate_notes"));
+		candidate_qualification_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_qualification_id")));
+		candidate_specialization_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_specialization_id")));
+		candidate_yop = CNumeric(PadQuotes(request.getParameter("dr_candidate_passingyear_id")));
+		candidate_institute_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_institute_id")));
+		candidate_experience= CNumeric(PadQuotes(request.getParameter("dr_candidate_expr_id")));
+		candidate_current_sal = PadQuotes(request.getParameter("txt_candidate_cur_sal"));
+		candidate_expected_sal = PadQuotes(request.getParameter("txt_candidate_exp_sal"));
+		candidate_sector_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_sector_id")));
+		candidate_functionalarea_id1 = CNumeric(PadQuotes(request.getParameter("dr_candidate_functionalarea1_id")));
+		candidate_role_id1 = CNumeric(PadQuotes(request.getParameter("dr_candidate_role1_id")));
+		candidate_functionalarea_id2 = CNumeric(PadQuotes(request.getParameter("dr_candidate_functionalarea2_id")));
+		candidate_role_id2 = CNumeric(PadQuotes(request.getParameter("dr_candidate_role2_id")));
+		candidate_functionalarea_id3 = CNumeric(PadQuotes(request.getParameter("dr_candidate_functionalarea3_id")));
+		candidate_role_id3 = CNumeric(PadQuotes(request.getParameter("dr_candidate_role3_id")));
+		candidate_area_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_area_id")));
+		candidate_curcity_id = CNumeric(PadQuotes(request.getParameter("dr_candidate_currentcity_id")));
+		candidate_prefcity_id1 = CNumeric(PadQuotes(request.getParameter("dr_candidate_prefcity1_id")));
+		candidate_prefcity_id2 = CNumeric(PadQuotes(request.getParameter("dr_candidate_prefcity2_id")));
+		candidate_prefcity_id3 = CNumeric(PadQuotes(request.getParameter("dr_candidate_prefcity3_id")));
+		candidate_skillset = PadQuotes(request.getParameter("textarea_candidate_skillset"));
+		
+	}
+
+	protected void CheckForm() {
+		
+		if (candidate_fname.equals("")) {
+			msg += "Please enter First Fname!<br>";
+		}
+		if (candidate_lname.equals("")) {
+			msg += "Please enter Last Name!<br>";
+		}
+		if (candidate_upass.equals("")) {
+			msg += "Please enter Password!<br>";
+		}
+		if (candidate_mobileno1.equals("")) {
+			msg += "Please enter Mobile No.!<br>";
+		}
+		if (candidate_email1.equals("")) {
+			msg += "Please enter Email!<br>";
+		}
+		if (candidate_gender.equals("0")) {
+			msg += "Please select Gender!<br>";
+		}
+		if (candidate_dob.equals("")) {
+			msg += "Please enter DOB!<br>";
+		}
+		if (candidate_married.equals("0")) {
+			msg += "Please choose Marital Status!<br>";
+		}
+		if (candidate_address.equals("")) {
+			msg += "Please enter address<br>!";
+		}
+		if (candidate_aadhaar_no.equals("")) {
+			msg += "Please enter Aadhar No.!<br>";
+		}
+		if(candidate_qualification_id.equals("0")) {
+			msg += "Please select Qualification!<br>";
+		}
+		if(candidate_specialization_id.equals("0")) {
+			msg += "Please select Specialization!<br>";
+		}
+		if(candidate_yop.equals("0")) {
+			msg += "Please select Passing Year!<br>";
+		}
+		if(candidate_institute_id.equals("0")) {
+			msg += "Please select Institute!<br>";
+		}
+		if(candidate_experience.equals("0")) {
+			msg += "Please select Exprereince!<br>";
+		}
+		if(candidate_current_sal.equals("0")) {
+			msg += "Please enter Current Salary!<br>";
+		}
+		if(candidate_expected_sal.equals("0")) {
+			msg += "Please enter Exprected Salary!<br>";
+		}
+		if(candidate_sector_id.equals("0")) {
+			msg += "Please select Sector!<br>";
+		}
+		if(candidate_functionalarea_id1.equals("0")) {
+			msg += "Please select Funcational Area 1!<br>";
+		}
+		if(candidate_role_id1.equals("0")) {
+			msg += "Please select Role 1!<br>";
+		}
+		if(candidate_area_id.equals("0")) {
+			msg += "Please select Area!<br>";
+		}
+		
+		if(candidate_curcity_id.equals("0")) {
+			msg += "Please select Current City!<br>";
+		}
+		if(candidate_prefcity_id1.equals("0")) {
+			msg += "Please select Preferred City!<br>";
+		}
+		
+		if (!msg.equals("")) {
+			msg = "Error!<br>" + msg;
+		}
+	}
+
+	protected void AddFields() throws SQLException {
+		CheckForm();
+		if (msg.equals("")) {
+			try {
+				con = connectDataBase();
+				stmttx = con.createStatement();
+				Strsql = "INSERT INTO candidatedb.rooman_candidate_data " 
+						+ " (" 
+						+ " candidate_fname, " 
+						+ " candidate_lname, "
+						+ " candidate_uuid, "
+						+ " candidate_upass, "
+						+ " candidate_mobile1, "
+						+ " candidate_mobile2, "
+						+ " candidate_email1, "
+						+ " candidate_email2, "
+						+ " candidate_gender, "
+						+ " candidate_dob, "
+						+ " candidate_married, "
+						+ " candidate_physically_challenged, "
+						+ " candidate_address, "
+						+ " candidate_aadhaar_no, "
+						+ " candidate_active, "
+						+ " candidate_notes, "
+						+ " candidate_qualification_id, "
+						+ " candidate_specialization_id, "
+						+ " candidate_yop, "
+						+ " candidate_institute_id, "
+						+ " candidate_experience, "
+						+ " candidate_current_sal,"
+						+ " candidate_expected_sal, "
+						+ " candidate_sector_id, "
+						+ " candidate_functionalarea_id1, "
+						+ " candidate_role_id1, "
+						+ " candidate_functionalarea_id2, "
+						+ " candidate_role_id2, "
+						+ " candidate_functionalarea_id3, "
+						+ " candidate_role_id3, "
+						+ " candidate_area_id, "
+						+ " candidate_curcity_id, "
+						+ " candidate_prefcity_id1, "
+						+ " candidate_prefcity_id2, "
+						+ " candidate_prefcity_id3, "
+						+ " candidate_skillset"
+						+ " )" 
+						+ " VALUES ("
+						+ "'" + candidate_fname + "'," 
+						+ "'" + candidate_lname + "'," 
+						+ "UUID(),"
+						+ "'" + candidate_upass + "'," 
+						+ "'" + candidate_mobileno1 + "'," 
+						+ "'" + candidate_mobileno2 + "'," 
+						+ "'" + candidate_email1 + "'," 
+						+ "'" + candidate_email2 + "'," 
+						+ "'" + candidate_gender + "',"
+						+ "'" + ConvertShortDateToStr(candidate_dob) + "',"
+						+ "'" + candidate_married + "',"
+						+ "'" + candidate_physically_challenged + "',"
+						+ "'" + candidate_address + "',"
+						+ "'" + candidate_aadhaar_no + "',"
+						+ "'" + candidate_active + "',"
+						+ "'" + candidate_notes + "',"
+						+ "'" + candidate_qualification_id + "',"
+						+ "'" + candidate_specialization_id + "',"
+						+ "'" + candidate_yop + "',"
+						+ "'" + candidate_institute_id + "',"
+						+ "'" + candidate_experience + "',"
+						+ "'" + candidate_current_sal + "',"
+						+ "'" + candidate_expected_sal + "',"
+						+ "'" + candidate_sector_id + "',"
+						+ "'" + candidate_functionalarea_id1 + "',"
+						+ "'" + candidate_role_id1 + "',"
+						+ "'" + candidate_functionalarea_id2 + "',"
+						+ "'" + candidate_role_id2 + "',"
+						+ "'" + candidate_functionalarea_id3 + "',"
+						+ "'" + candidate_role_id3 + "',"
+						+ "'" + candidate_area_id + "',"
+						+ "'" + candidate_curcity_id + "',"
+						+ "'" + candidate_prefcity_id1 + "',"
+						+ "'" + candidate_prefcity_id2 + "',"
+						+ "'" + candidate_prefcity_id3 + "',"
+						+ "'" + candidate_skillset + "'"
+						+ ")";
+
+//				 SOP("Insert eval query===" + StrSql);
+				candidate_id = UpdateQueryReturnID(Strsql);
+
+			} catch (Exception e) {
+				SOPError("Candidate Placement===" + this.getClass().getName());
+				SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + e);
+			} finally {
+				stmttx.close();
+				if (con != null && !con.isClosed()) {
+					con.close();
+				}
+			}
+		}
+	}
+
+	protected void UpdateFields() throws SQLException {
+		CheckForm();
+		if (msg.equals("")) {
+			try {
+				con = connectDataBase();
+				con.setAutoCommit(false);
+				stmttx = con.createStatement();
+
+				Strsql =  " UPDATE candidatedb.rooman_candidate_data" 
+				        + " SET"
+						+ " candidate_fname = '" + candidate_fname + "',"
+						+ " candidate_lname = '" + candidate_lname + "',"
+						+ " candidate_upass = '" + candidate_upass + "',"
+					 	+ " candidate_physically_challenged = '" + candidate_physically_challenged + "',"
+					 	+ " candidate_mobile1 = '" + candidate_mobileno1 + "',"
+						+ " candidate_email1 = '" + candidate_email1 + "',"
+						+ " candidate_mobile2 = '" + candidate_mobileno2 + "',"
+						+ " candidate_email2 = '" + candidate_email2 + "',"
+					 	+ " candidate_gender  = '" + candidate_gender + "',"
+					 	+ " candidate_dob = '" + ConvertShortDateToStr(candidate_dob) + "',"
+					 	+ " candidate_married = '" + candidate_married + "',"
+					 	+ " candidate_area_id = " + candidate_area_id + ","
+						+ " candidate_address = '" + candidate_address + "',"
+						+ " candidate_aadhaar_no = '" + candidate_aadhaar_no + "',"
+						+ " candidate_active = '" + candidate_active + "',"
+						+ " candidate_notes = '" + candidate_notes + "',"
+						+ " candidate_qualification_id = " + candidate_qualification_id + ","
+						+ " candidate_specialization_id = " + candidate_specialization_id + ","
+						+ " candidate_yop = '" + candidate_yop + "',"
+						+ " candidate_institute_id = " + candidate_institute_id + ","
+						+ " candidate_experience = " + candidate_experience + ","
+						+ " candidate_current_sal = '" + candidate_current_sal + "',"
+						+ " candidate_expected_sal = '" + candidate_expected_sal + "',"
+						+ " candidate_sector_id= '" + candidate_sector_id + "',"
+						+ " candidate_functionalarea_id1 = " + candidate_functionalarea_id1 + ","
+						+ " candidate_functionalarea_id2 = " + candidate_functionalarea_id2 + ","
+						+ " candidate_functionalarea_id3 = " + candidate_functionalarea_id3 + ","
+						+ " candidate_role_id1 = " + candidate_role_id1 + ","
+						+ " candidate_role_id2 = " + candidate_role_id2 + ","
+						+ " candidate_role_id3 = " + candidate_role_id3 + ","
+						+ " candidate_curcity_id = " + candidate_curcity_id + ","
+						+ " candidate_prefcity_id1 = " + candidate_prefcity_id1 + ","
+						+ " candidate_prefcity_id2 = " + candidate_prefcity_id2 + ","
+						+ " candidate_prefcity_id3 = " + candidate_prefcity_id3 + ","
+						+ " candidate_skillset = '" + candidate_skillset + "'"
+						+ " WHERE candidate_id = " + candidate_id + "";
+
+				 SOP("update candidate===" + Strsql);
+				stmttx.addBatch(Strsql);
+//				SOP("UPDATEEE=" + Strsql);
+				stmttx.executeBatch();
+				con.commit();
+			} catch (Exception e) {
+				if (con.isClosed()) {
+					SOPError("conn is closed.....");
+				}
+				if (!con.isClosed() && con != null) {
+					con.rollback();
+					SOPError("connection rollback...\n sql--" + Strsql);
+				}
+				msg = "<br>Transaction Error!";
+				SOPError(this.getClass().getName());
+				SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + e);
+			} finally {
+				stmttx.close();
+				con.commit();
+				if (con != null && !con.isClosed()) {
+					con.close();
+				}
+			}
+		}
+	}
+
+	protected void DeleteFields() {
+		SOP("inside delete feilds");
+		Strsql = "SELECT COUNT(eval_id)"
+				+ " FROM candidatedb.rooman_candidate_eval "
+				+ " WHERE eval_candidate_id = " + candidate_id + "";
+		if (!ExecuteQuery(Strsql).equals("0")) {
+			msg += "<br>Candidate is associated with Evaluation(s)!";
+		}
+
+		if (msg.equals("")) {
+			try {
+				Strsql = "DELETE FROM candidatedb.rooman_candidate_data"
+						+ " WHERE candidate_id = " + candidate_id + "";
+				updateQuery(Strsql);
+
+			} catch (Exception ex) {
+				SOPError(this.getClass().getName());
+				SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
+			}
+		}
+	}
+
+	protected void PopulateFields() {
+		try {
+			
+				Strsql = " SELECT candidate_id, candidate_title_id, "
+						+ " COALESCE(candidate_fname,'') AS candidate_fname, COALESCE(candidate_lname,'') AS candidate_lname, candidate_upass, "
+						+ " candidate_qualification_id, candidate_specialization_id,  candidate_institute_id, candidate_mobile1, candidate_email1, "
+						+ " COALESCE(candidate_mobile2,'') AS candidate_mobile2, COALESCE(candidate_email2,'') AS candidate_email2, "
+						+ " candidate_married, candidate_gender, candidate_address, candidate_area_id, candidate_experience, "
+						+ " candidate_curcity_id, candidate_prefcity_id1, candidate_prefcity_id2, candidate_prefcity_id3, candidate_expected_sal, COALESCE(candidate_notes,'') AS candidate_notes, "
+						+ " candidate_fresher, candidate_current_sal, candidate_lang, candidate_skillset, candidate_active, candidate_physically_challenged, "
+						+ " candidate_aadhaar_no, candidate_dob, candidate_yop, candidate_sector_id, candidate_functionalarea_id1, candidate_functionalarea_id2, "
+						+ " candidate_functionalarea_id3, candidate_role_id1, candidate_role_id2, candidate_role_id3, candidate_register_date "
+						+ " FROM candidatedb.rooman_candidate_data "
+						+ " WHERE candidate_id = " + candidate_id + "";
+				SOP("StrSql PopulateFields--= " + Strsql);
+			
+			 CachedRowSet crs = processQuery(Strsql, 0);
+
+			while (crs.next()) {
+				candidate_id = crs.getString("candidate_id");
+				candidate_fname = crs.getString("candidate_fname");
+				candidate_lname = crs.getString("candidate_lname");
+				candidate_upass = crs.getString("candidate_upass");
+				candidate_physically_challenged = crs.getString("candidate_physically_challenged");
+				candidate_mobileno1 = crs.getString("candidate_mobile1");
+				candidate_mobileno2 = crs.getString("candidate_mobile2");
+				candidate_email1 = crs.getString("candidate_email1");
+				candidate_email2 = crs.getString("candidate_email2");
+				candidate_gender = crs.getString("candidate_gender");
+				candidate_dob = strToShortDate(crs.getString("candidate_dob"));
+				candidate_married = crs.getString("candidate_married");
+				candidate_area_id = crs.getString("candidate_area_id");
+				candidate_address = crs.getString("candidate_address");
+				candidate_aadhaar_no = crs.getString("candidate_aadhaar_no");
+				candidate_active = crs.getString("candidate_active");
+				candidate_notes = crs.getString("candidate_notes");
+				candidate_qualification_id = crs.getString("candidate_qualification_id");
+				candidate_specialization_id = crs.getString("candidate_specialization_id");
+				candidate_yop = crs.getString("candidate_yop");
+				candidate_institute_id = crs.getString("candidate_institute_id");
+				candidate_experience = crs.getString("candidate_experience");
+				candidate_current_sal = crs.getString("candidate_current_sal");
+				candidate_expected_sal = crs.getString("candidate_expected_sal");
+				candidate_sector_id = crs.getString("candidate_sector_id");
+				candidate_functionalarea_id1 = crs.getString("candidate_functionalarea_id1");
+				candidate_functionalarea_id2 = crs.getString("candidate_functionalarea_id2");
+				candidate_functionalarea_id3 = crs.getString("candidate_functionalarea_id3");
+				candidate_role_id1 = crs.getString("candidate_role_id1");
+				candidate_role_id2 = crs.getString("candidate_role_id2");
+				candidate_role_id3 = crs.getString("candidate_role_id3");
+				candidate_curcity_id = crs.getString("candidate_curcity_id");
+				candidate_prefcity_id1 = crs.getString("candidate_prefcity_id1");
+				candidate_prefcity_id2 = crs.getString("candidate_prefcity_id2");
+				candidate_prefcity_id3 = crs.getString("candidate_prefcity_id3");
+				candidate_skillset = crs.getString("candidate_skillset");
+			}
+			crs.close();
+		} catch (Exception ex) {
+			SOPError(this.getClass().getName());
+			SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
+		}
+	}
+	
+	
+	public String PopulateGender() {
+
+		String sex = "<select name=\"dr_candidate_gender\" class=\"form-control\" id=\"dr_candidate_gender\">";
+		sex += "<option value = 0>Select</option>";
+		sex = sex + "<option value = 1" + Selectdrop(1, candidate_gender) + ">Male</option>\n";
+		sex = sex + "<option value = 2" + Selectdrop(2, candidate_gender) + ">Female</option>\n";
+		sex += "</select>";
+		return sex;
+	}
+	
+	public String PopulateMarried() {
+
+		String married = "<select name=\"dr_candidate_married\" class=\"form-control\" id=\"dr_candidate_married\">";
+		married += "<option value = 0>Select</option>";
+		married = married + "<option value = 1" + Selectdrop(1, candidate_married) + ">Married</option>\n";
+		married = married + "<option value = 2" + Selectdrop(2, candidate_married) + ">Single</option>\n";
+		married += "</select>";
+		return married;
+	}
+	
 	
 	public String PopulateQualification() {
 		StringBuilder Str = new StringBuilder();
@@ -253,35 +585,6 @@ public class Candidate_Register extends Connect {
 		}
 	}
 	
-	public String PopulateSpecialization() {
-		StringBuilder Str = new StringBuilder();
-		try {
-			Strsql = "SELECT specialization_id, specialization_name"
-					+ " FROM candidatedb.rooman_specialization"
-					+ " WHERE 1=1"
-					+ " GROUP BY specialization_id"
-					+ " ORDER BY specialization_name";
-			//System.out.println("PopulateSpecialization==" + Strsql);
-			CachedRowSet crs = processQuery(Strsql, 0);
-
-			Str.append("<select name=\"dr_candidate_specialization_id\" class=\"form-control\" id=\"dr_candidate_specialization_id\">");
-			Str.append("<option value=0> Select </option>\n");
-			while (crs.next()) {
-				Str.append("<option value=").append(crs.getString("specialization_id"));
-				Str.append(StrSelectdrop(crs.getString("specialization_id"), candidate_specialization_id));
-				Str.append(">").append(crs.getString("specialization_name")).append("</option>\n");
-			}
-			Str.append("</select>");
-			crs.close();
-			return Str.toString();
-		} catch (Exception ex) {
-			//System.out.println(this.getClass().getName());
-			//System.out.println("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
-			return "";
-		}
-	}
-	
-	
 	public String PopulateSpecialization(String qualification_id) {
 		StringBuilder Str = new StringBuilder();
 		try {
@@ -309,15 +612,14 @@ public class Candidate_Register extends Connect {
 		}
 		return Str.toString();
 	}
-	
-	
+
 	public String PopulatePassingYear() {
 		StringBuilder Str = new StringBuilder();
 		try {
 			Str.append("<select name=\"dr_candidate_passingyear_id\" class=\"form-control\" id=\"dr_candidate_passingyear_id\">");
 			Str.append("<option value=0> Select YOP</option>\n");
 				for(int i = 2010; i<2018; i++) {
-					Str.append("<option value=").append(i).append(">"); 
+					Str.append("<option value=").append(i).append(Selectdrop(i, candidate_yop)).append(">"); 
 					Str.append(i).append("</option>\n");
 				}
 			Str.append("</select>");
@@ -364,7 +666,7 @@ public class Candidate_Register extends Connect {
 			Str.append("<option value=0> Select Experience</option>\n");
 			Str.append("<option value=1> Fresher</option>\n");
 				for(int i = 2; i<11; i++) {
-					Str.append("<option value=").append(i).append(">"); 
+					Str.append("<option value=").append(i).append(Selectdrop(i, candidate_experience)).append(">"); 
 					Str.append(i + "Year(s)").append("</option>\n");
 				}
 			Str.append("</select>");
@@ -633,6 +935,34 @@ public class Candidate_Register extends Connect {
 	}
 	
 	
+	public String PopulateArea() {
+		StringBuilder Str = new StringBuilder();
+		try {
+			Strsql = "SELECT area_id, area_name"
+					+ " FROM candidatedb.rooman_area"
+					+ " WHERE 1=1"
+					+ " GROUP BY area_id"
+					+ " ORDER BY area_name";
+			System.out.println("PopulateCurrentLocation==" + Strsql);
+			CachedRowSet crs = processQuery(Strsql, 0);
+
+			Str.append("<select name=\"dr_candidate_area_id\" class=\"form-control\" id=\"dr_candidate_area_id\">");
+			Str.append("<option value=0> Select </option>\n");
+			while (crs.next()) {
+				Str.append("<option value=").append(crs.getString("area_id"));
+				Str.append(StrSelectdrop(crs.getString("area_id"), candidate_area_id));
+				Str.append(">").append(crs.getString("area_name")).append("</option>\n");
+			}
+			Str.append("</select>");
+			crs.close();
+			
+		} catch (Exception ex) {
+			System.out.println(this.getClass().getName());
+			System.out.println("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
+		}
+		return Str.toString();
+	}
+	
 	public String PopulateCurrentLocation() {
 		StringBuilder Str = new StringBuilder();
 		try {
@@ -749,181 +1079,5 @@ public class Candidate_Register extends Connect {
 	
 	
 	
-	
-	public String checkForm() {
-		if (candidate_fname.equals("")) {
-			msg += "Please enter First Fname!<br>";
-		}
-		if (candidate_lname.equals("")) {
-			msg += "Please enter Last Name!<br>";
-		}
-		if (candidate_upass.equals("")) {
-			msg += "Please enter Password!<br>";
-		}
-		if (candidate_mobileno1.equals("")) {
-			msg += "Please enter Mobile No.!<br>";
-		}
-		if (candidate_email1.equals("")) {
-			msg += "Please enter Email!<br>";
-		}
-		if (candidate_gender.equals("0")) {
-			msg += "Please choose Gender!<br>";
-		}
-		if (candidate_dob.equals("")) {
-			msg += "Please enter DOB!<br>";
-		}
-		if (candidate_married.equals("0")) {
-			msg += "Please choose Marital Status!<br>";
-		}
-		if (candidate_address.equals("")) {
-			msg += "Please enter address<br>!";
-		}
-		if (candidate_aadhaar_no.equals("")) {
-			msg += "Please enter Aadhar No.!<br>";
-		}
-		if(candidate_qualification_id.equals("0")) {
-			msg += "Please select Qualification!<br>";
-		}
-		if(candidate_specialization_id.equals("0")) {
-			msg += "Please select Specialization!<br>";
-		}
-		if(candidate_yop.equals("0")) {
-			msg += "Please select Passing Year!<br>";
-		}
-		if(candidate_institute_id.equals("0")) {
-			msg += "Please select Institute!<br>";
-		}
-		if(candidate_experience.equals("0")) {
-			msg += "Please select Exprereince!<br>";
-		}
-		if(candidate_current_sal.equals("0")) {
-			msg += "Please enter Current Salary!<br>";
-		}
-		if(candidate_expected_sal.equals("0")) {
-			msg += "Please enter Exprected Salary!<br>";
-		}
-		if(candidate_sector_id.equals("0")) {
-			msg += "Please select Sector!<br>";
-		}
-		if(candidate_functionalarea_id1.equals("0")) {
-			msg += "Please select Funcational Area 1!<br>";
-		}
-		if(candidate_role_id1.equals("0")) {
-			msg += "Please select Role 1!<br>";
-		}
-		if(candidate_curcity_id.equals("0")) {
-			msg += "Please select Current City!<br>";
-		}
-		if(candidate_prefcity_id1.equals("0")) {
-			msg += "Please select Preferred City!<br>";
-		}
-		
-		if (!msg.equals("")) {
-			msg = "Error!<br>" + msg;
-		}
-		return msg;
-	}
-
-	public void addFields(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			if (msg.equals("")) {
-				Strsql = "INSERT INTO candidatedb.rooman_candidate_data " 
-						+ " (" 
-						+ " candidate_fname, " 
-						+ " candidate_lname, "
-						+ " candidate_uuid, "
-						+ " candidate_upass, "
-						+ " candidate_mobile1, "
-						+ " candidate_mobile2, "
-						+ " candidate_email1, "
-						+ " candidate_email2, "
-						+ " candidate_gender, "
-						+ " candidate_dob, "
-						+ " candidate_married, "
-						+ " candidate_physically_challenged, "
-						+ " candidate_address, "
-						+ " candidate_aadhaar_no, "
-						+ " candidate_active, "
-						+ " candidate_notes, "
-						+ " candidate_qualification_id, "
-						+ " candidate_specialization_id, "
-						+ " candidate_yop, "
-						+ " candidate_institute_id, "
-						+ " candidate_experience, "
-						+ " candidate_current_sal,"
-						+ " candidate_expected_sal, "
-						+ " candidate_sector_id, "
-						+ " candidate_functionalarea_id1, "
-						+ " candidate_role_id1, "
-						+ " candidate_functionalarea_id2, "
-						+ " candidate_role_id2, "
-						+ " candidate_functionalarea_id3, "
-						+ " candidate_role_id3, "
-						+ " candidate_curcity_id, "
-						+ " candidate_prefcity_id1, "
-						+ " candidate_prefcity_id2, "
-						+ " candidate_prefcity_id3, "
-						+ " candidate_skillset"
-						+ " )" 
-						+ " VALUES ("
-						+ "'" + candidate_fname + "'," 
-						+ "'" + candidate_lname + "'," 
-						+ "UUID(),"
-						+ "'" + candidate_upass + "'," 
-						+ "'" + candidate_mobileno1 + "'," 
-						+ "'" + candidate_mobileno2 + "'," 
-						+ "'" + candidate_email1 + "'," 
-						+ "'" + candidate_email2 + "'," 
-						+ "'" + candidate_gender + "',"
-						+ "'" + candidate_dob + "',"
-						+ "'" + candidate_married + "',"
-						+ "'" + candidate_physically_challenged + "',"
-						+ "'" + candidate_address + "',"
-						+ "'" + candidate_aadhaar_no + "',"
-						+ "'" + candidate_active + "',"
-						+ "'" + candidate_notes + "',"
-						+ "'" + candidate_qualification_id + "',"
-						+ "'" + candidate_specialization_id + "',"
-						+ "'" + candidate_yop + "',"
-						+ "'" + candidate_institute_id + "',"
-						+ "'" + candidate_experience + "',"
-						+ "'" + candidate_current_sal + "',"
-						+ "'" + candidate_expected_sal + "',"
-						+ "'" + candidate_sector_id + "',"
-						+ "'" + candidate_functionalarea_id1 + "',"
-						+ "'" + candidate_role_id1 + "',"
-						+ "'" + candidate_functionalarea_id2 + "',"
-						+ "'" + candidate_role_id2 + "',"
-						+ "'" + candidate_functionalarea_id3 + "',"
-						+ "'" + candidate_role_id3 + "',"
-						+ "'" + candidate_curcity_id + "',"
-						+ "'" + candidate_prefcity_id1 + "',"
-						+ "'" + candidate_prefcity_id2 + "',"
-						+ "'" + candidate_prefcity_id3 + "',"
-						+ "'" + candidate_skillset + "'"
-						+ ")";
-					 //System.out.println("insert qry=="+Strsql);
-					 int res = stmt.executeUpdate(Strsql);
-//					 //System.out.println("afftected rws are==" + res);
-					if (res != 0) {
-						response.sendRedirect("candidate/candidate-list.jsp?msg=Candidate Registered Successfully!");
-					}else {
-						response.sendRedirect("candidate/candidate-register.jsp?msg=Something is not right!");
-					}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-
-	}
-	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
 
 }

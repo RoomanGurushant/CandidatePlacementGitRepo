@@ -12,10 +12,10 @@
 							<% break;
 							
 							
-	case "candidateevaluate" : %> <jsp:useBean id="candidateevaluate" class="candidate.Candidate_Evaluation_Update" scope="request" />
+	case "candidateevaluate" : %> <jsp:useBean id="candidateevaluate" class="candidate.Candidate_Eval_Update" scope="request" />
 	<% candidateevaluate.doGet(request, response); %>
 	<%=candidateevaluate.msg%>
 	<% break;
 	
-	default :  response.sendRedirect("../candidate/error-page.jsp?msg=Invalid Request!"); 
+	default :  response.sendRedirect("../portal/error.jsp?msg=Invalid Request!"); 
 } %>

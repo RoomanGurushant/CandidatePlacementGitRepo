@@ -80,9 +80,8 @@
 				</a>
 					<div class="dropdown-menu dropdown-primary"
 						aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="candidate-register.jsp">Add
-							Candidate</a> <a class="dropdown-item" href="candidate-list.jsp">List
-							Candidate</a>
+						<a class="dropdown-item" href="candidate-register.jsp?add=yes">Add Candidate</a> 
+						<a class="dropdown-item" href="candidate-list.jsp?all=yes">List Candidate</a>
 					</div></li>
 			</ul>
 

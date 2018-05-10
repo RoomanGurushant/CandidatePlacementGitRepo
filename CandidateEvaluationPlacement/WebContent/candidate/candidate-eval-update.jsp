@@ -1,6 +1,6 @@
 <%-- <%@ page errorPage="../portal/error.jsp"%> --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<jsp:useBean id="mybean" class="candidate.Candidate_Evaluation_Update" scope="request" />
+<jsp:useBean id="mybean" class="candidate.Candidate_Eval_Update" scope="request" />
 <%mybean.doPost(request,response); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

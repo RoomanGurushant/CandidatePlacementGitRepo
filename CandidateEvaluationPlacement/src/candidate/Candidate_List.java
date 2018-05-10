@@ -54,9 +54,9 @@ public class Candidate_List extends Connect {
 						+ " COALESCE(area_pincode,'') AS area_pincode, COALESCE(city_name,'') AS city_name, COALESCE(city_state_id,'') AS city_state_id, "
 						+ " COALESCE(state_name,'') AS state_name"
 						+ " FROM candidatedb.rooman_candidate_data"
-						+ " LEFT JOIN candidatedb.rooman_area ON area_id =  candidate_area_id"
-						+ " LEFT JOIN candidatedb.rooman_city ON city_id =  area_city_id"
-						+ " LEFT JOIN candidatedb.rooman_state ON state_id =  city_state_id"
+						+ " INNER JOIN candidatedb.rooman_area ON area_id =  candidate_area_id"
+						+ " INNER JOIN candidatedb.rooman_city ON city_id =  area_city_id"
+						+ " INNER JOIN candidatedb.rooman_state ON state_id =  city_state_id"
 						+ " GROUP BY candidate_id "
 						+ " ORDER BY candidate_id";
 				
@@ -141,7 +141,7 @@ public class Candidate_List extends Connect {
 						Str.append("<td valign=top align=left>").append("candidate_experience").append("</td>");
 						Str.append("<td valign=top align=left>");
 						Str.append("<a href=\"candidate-register.jsp?update=yes&candidate_id=").append(rs.getString("candidate_id")).append("\">").append("Update candidate").append("</a><br>");
-						Str.append("<a href=\"candidate-evaluation-update.jsp?add=yes&candidate_id=").append(rs.getString("candidate_id")).append("\">").append("Add Evaluation").append("</a><br>");
+						Str.append("<a href=\"candidate-eval-update.jsp?add=yes&candidate_id=").append(rs.getString("candidate_id")).append("\">").append("Add Evaluation").append("</a><br>");
 						Str.append("<a href=\"candidate-eval-list.jsp?all=yes\">").append("List Evaluation").append("</a><br>");
 						Str.append("</td>\n");
 						Str.append("</tr>\n");
@@ -149,11 +149,8 @@ public class Candidate_List extends Connect {
 					Str.append("</tbody></table></div>\n");
 					rs.close();
 					close();
-			} catch (SQLException ex) {
-				SOPError("Naukriforu== " + this.getClass().getName());
-				SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
-			}catch (Exception ex) {
-				SOPError("Naukriforu== " + this.getClass().getName());
+			} catch (Exception ex) {
+				SOPError("Candidate== " + this.getClass().getName());
 				SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
 			}
 //		}

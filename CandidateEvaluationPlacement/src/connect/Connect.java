@@ -112,7 +112,20 @@ public class Connect extends HttpServlet {
 		final Logger logger = Logger.getLogger(this.getClass());
 		logger.error(Str);
 	}
-
+	
+	public String PopulateCheck(String checkid) {
+		try {
+			if (!(checkid == null) && (checkid.equals("1"))) {
+				return "Checked ";
+			}
+			return " ";
+		} catch (Exception ex) {
+			SOPError(this.getClass().getName());
+			SOPError("Error in " + new Exception().getStackTrace()[0].getMethodName() + " : " + ex);
+			return " ";
+		}
+	}
+	
 	public boolean isNumeric(String s) {
 		String validChars = "0123456789.";
 		boolean isNumeric = true;
@@ -161,6 +174,24 @@ public class Connect extends HttpServlet {
 		return checkBox;
 	}
 
+	public String Selectdrop(int idvalue, String dropid) {
+		try {
+			if (!(dropid == null) && !(dropid.equals(""))) {
+				if (idvalue == Integer.parseInt(dropid)) {
+					return " selected";
+				}
+			}
+			return " ";
+		} catch (Exception ex) {
+			SOPError(this.getClass().getName());
+			SOPError("Error in "
+					+ new Exception().getStackTrace()[0].getMethodName()
+					+ " : " + ex);
+			return " ";
+		}
+	}
+
+	
 	public String StrSelectdrop(String value, String dropid) {
 		try {
 			if (!(dropid == null) && !(dropid.equals(""))) {
@@ -435,6 +466,39 @@ public class Connect extends HttpServlet {
 			return "";
 		}
 	}
+	
+	public String ConvertShortDateToStr(String strDateTime) {
+		// logger.error("strDateTime======="+strDateTime);
+		Date dttemp;
+		String strOutDt = "";
+		try {
+			if (strDateTime != null && !strDateTime.equals("")) {
+				dttemp = new SimpleDateFormat("dd/MM/yyyy").parse(strDateTime);
+				strOutDt = new SimpleDateFormat("yyyyMMddHHmmss").format(dttemp);
+			}
+			return strOutDt;
+		} catch (Exception ex) {
+			logger.error(this.getClass().getName());
+			logger.error("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
+			return "";
+		}
+	}
+	
+	public String strToShortDate(String strDateTime) {
+		String strOutDt = "";
+		try {
+			if (strDateTime != null && !strDateTime.equals("")) {
+				Date dttemp = new SimpleDateFormat("yyyyMMddHHmmss").parse(strDateTime);
+				strOutDt = new SimpleDateFormat("dd/MM/yyyy").format(dttemp);
+			}
+			return strOutDt;
+		} catch (Exception ex) {
+			logger.error(this.getClass().getName());
+			logger.error("Error in " + new Exception().getStackTrace()[0].getMethodName() + ": " + ex);
+			return " " + ex;
+		}
+	}
+
 	
 	public String strToLongDate(String strDateTime) {
 		String strOutDt = "";
